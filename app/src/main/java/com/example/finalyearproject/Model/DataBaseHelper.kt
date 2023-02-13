@@ -24,6 +24,12 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     private val Column_CustomerUserName = "UserName"
     private val Column_CustomerPassword = "Password"
 
+    /**Admin Table**/
+    private val AdminTableName = "Admin"
+    private val Column_AdminId = "AdminId"
+    private val Column_AdminUserName = "AdminUserName"
+    private val Column_AdminPassword = "AdminPassword"
+
 
     override fun onCreate(db: SQLiteDatabase?) {
         try {
@@ -35,6 +41,13 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
                     Column_CustomerNumber + " TEXT NOT NULL, " + Column_CustomerUserName + " TEXT NOT NULL, " +
                     Column_CustomerPassword + " TEXT NOT NULL "
             db?.execSQL(sqlCreateStatement)
+
+            /*********************--- Admin ---*************************/
+             sqlCreateStatement = " CREATE TABLE " + AdminTableName + " ( " + Column_AdminId +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + Column_AdminUserName + " TEXT NOT NULL, " +
+                            Column_AdminPassword + " TEXT NOT NULL "
+            db?.execSQL(sqlCreateStatement)
+
         } catch (e: SQLiteException) {}
     }
 
