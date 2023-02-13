@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 
 
-private val DatabaseName = "UC_Database.db"
+private val DatabaseName = "FYPDatabase.db"
 private val ver : Int = 1
 class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName, null,ver){
 
@@ -63,32 +63,33 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         else return 1
     }
 
-   private fun CheckCustomerLoginName(customer: Customer): Int {
-       val db: SQLiteDatabase
-       try {
-           db = this.readableDatabase
-       }
-       catch(e: SQLiteException) {
-           return -2
-       }
-       val CustomerUsername = customer.UserName.lowercase()
 
-       val sqlStatement = "SELECT * FROM $CustomerTableName WHERE $Column_CustomerUserName = ?"
-       val param = arrayOf(CustomerUsername)
-       val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+    private fun CheckCustomerLoginName(customer: Customer): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+        val CustomerUsername = customer.UserName.lowercase()
 
-       if(cursor.moveToFirst()){
-           // The user is found
-           val n = cursor.getInt(0)
-           cursor.close()
-           db.close()
-           return -3 // error the user name is already exist
-       }
+        val sqlStatement = "SELECT * FROM $CustomerTableName WHERE $Column_CustomerUserName = ?"
+        val param = arrayOf(CustomerUsername)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
 
-       cursor.close()
-       db.close()
-       return 0
-   }
+        if(cursor.moveToFirst()){
+            // The user is found
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return -3 // error the user name is already exist
+        }
+
+        cursor.close()
+        db.close()
+        return 0
+    }
 
     fun getCustomer (customer: Customer) : Int {
         val db: SQLiteDatabase
