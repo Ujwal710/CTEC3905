@@ -55,6 +55,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         TODO("Not yet implemented")
     }
 
+    /*********************--- AddCustomer ---*************************/
+
     fun AddCustomer(customer: Customer): Int {
         val db: SQLiteDatabase = this.writableDatabase
         val cv: ContentValues = ContentValues()
@@ -76,6 +78,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         else return 1
     }
 
+    /*********************--- CheckCustomerLoginName ---*************************/
 
     private fun CheckCustomerLoginName(customer: Customer): Int {
         val db: SQLiteDatabase
@@ -104,7 +107,9 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         return 0
     }
 
-    fun getCustomer (customer: Customer) : Int {
+    /*********************--- getCustomer ---*************************/
+
+    fun getCustomer (Username : String, Password : String) : Int {
         val db: SQLiteDatabase
         try {
             db = this.readableDatabase
@@ -112,8 +117,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         catch(e: SQLiteException) {
             return -2
         }
-        val CustomerUsername = customer.UserName.lowercase()
-        val CustomerPassword = customer.Password
+        val CustomerUsername = Username.lowercase()
+        val CustomerPassword = Password
         val sqlStatement = "SELECT * FROM $CustomerTableName WHERE $Column_CustomerUserName = ? AND $Column_CustomerPassword = ?"
         val param = arrayOf(CustomerUsername,CustomerPassword)
         val cursor: Cursor =  db.rawQuery(sqlStatement,param)
@@ -127,4 +132,31 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         db.close()
         return -1
     }
+
+    /*********************--- Customer ---*************************/
+
+    fun getAdmin (Admin_Username: String, Admin_Password: String): Int{
+        val db: SQLiteDatabase
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+        val AdminUserName = Admin_Username
+        val AdminPassword = Admin_Password
+        val sqlStatement = "SELECT * FROM $AdminTableName WHERE $Column_AdminUserName = ? AND $Column_AdminPassword = ?"
+        val param = arrayOf(AdminUserName,AdminPassword)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+        if(cursor.moveToFirst()){
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return n
+        }
+        cursor.close()
+        db.close()
+        return -1
+    }
+
 }
