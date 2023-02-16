@@ -85,6 +85,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
+                android:onClick="navAccount"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_person"
