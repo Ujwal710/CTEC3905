@@ -18,10 +18,13 @@
             android:name=".AdminProductLogsPage"
             android:exported="false" />
         <activity
+            android:name=".AdminHomePage"
+            android:exported="false"/>
+        <activity
             android:name=".RegisterDiffActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminHomePage"
+            android:name=".CustomerContactPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
