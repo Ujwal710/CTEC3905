@@ -24,7 +24,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonHomeAcc"
+                android:id="@+id/buttonCSHome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -32,53 +32,56 @@
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
-                android:onClick="Homebutton"
+                android:onClick="navCSHome"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_home"
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/CustomerLogAcc"
+                android:id="@+id/CSShop"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="C"
+                android:onClick="navCSShop"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_storefront_24"
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonOrderlist1"
+                android:id="@+id/buttonCSCart"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
+                android:onClick="navCSCart"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_shopping_cart_24"
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonCustomerrequest1"
+                android:id="@+id/buttonCSWishList"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
+                android:onClick="navCSWishlist"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_favorite_24"
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonProductLog1"
+                android:id="@+id/buttonCSAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
@@ -86,7 +89,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
-                android:onClick="navAccount"
+                android:onClick="navCSAccount"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_person"
@@ -114,7 +117,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/smalllogo" />
+                android:onClick="navCSHome"
+                app:srcCompat="@drawable/smalllogo"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textViewCustomerServicetitle"

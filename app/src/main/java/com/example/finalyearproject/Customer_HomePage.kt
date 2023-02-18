@@ -5,37 +5,37 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
-class Customer_CustomerServicePage : AppCompatActivity() {
+class Customer_HomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_customer_customer_service_page)
+        setContentView(R.layout.activity_customer_home_page)
     }
 
-    fun navCSHome(view: View) {
+    fun navHHome(view: View) {
         val intent = Intent(this, Customer_HomePage::class.java)
         startActivity(intent)
 
 
     }
-    fun navCSShop(view: View) {
+    fun navHShop(view: View) {
         val intent = Intent(this, Customer_ShopPage::class.java)
         startActivity(intent)
 
 
     }
-    fun navCSCart(view: View) {
+    fun navHCart(view: View) {
         val intent = Intent(this, Customer_Cart::class.java)
         startActivity(intent)
 
 
     }
-    fun navCSWishlist(view: View) {
+    fun navHWishlist(view: View) {
         val intent = Intent(this, Customer_Wishlist::class.java)
         startActivity(intent)
 
 
     }
-    fun navCSAccount(view: View) {
+    fun navHAccount(view: View) {
         val intent = Intent(this, CustomerContactPage::class.java)
         startActivity(intent)
 

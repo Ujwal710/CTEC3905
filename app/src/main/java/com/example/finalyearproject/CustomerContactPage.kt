@@ -12,31 +12,31 @@ class CustomerContactPage : AppCompatActivity() {
         setContentView(R.layout.activity_customer_contact_page)
     }
 
-    fun navHome(view: View) {
-        val intent = Intent(this, RegisterDiffActivity::class.java)
+    fun navACCHome(view: View) {
+        val intent = Intent(this, Customer_HomePage::class.java)
         startActivity(intent)
 
 
     }
-    fun navShop(view: View) {
-        val intent = Intent(this, RegisterDiffActivity::class.java)
+    fun navACCShop(view: View) {
+        val intent = Intent(this, Customer_ShopPage::class.java)
         startActivity(intent)
 
 
     }
-    fun navCart(view: View) {
-        val intent = Intent(this, RegisterDiffActivity::class.java)
+    fun navACCCart(view: View) {
+        val intent = Intent(this, Customer_Cart::class.java)
         startActivity(intent)
 
 
     }
-    fun navWishlist(view: View) {
-        val intent = Intent(this, RegisterDiffActivity::class.java)
+    fun navACCWishlist(view: View) {
+        val intent = Intent(this, Customer_Wishlist::class.java)
         startActivity(intent)
 
 
     }
-    fun navAccount(view: View) {
+    fun navACCAccount(view: View) {
         val intent = Intent(this, CustomerContactPage::class.java)
         startActivity(intent)
 

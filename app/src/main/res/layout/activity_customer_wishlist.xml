@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bb"
+    android:onClick="navWLAccount"
+    tools:context=".Customer_Wishlist">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@drawable/navigation_layout"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonWLHome"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DFECEC"
+                android:hint="h"
+                android:onClick="navWLHome"
+                android:paddingLeft="25dp"
+                android:textColorHint="#DFECEC"
+                app:icon="@drawable/baseline_home"
+                app:iconTint="#000000" />
+
+            <Button
+                android:id="@+id/WLShop"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DFECEC"
+                android:hint="C"
+                android:onClick="navWLShop"
+                android:paddingLeft="25dp"
+                android:textColorHint="#DFECEC"
+                app:icon="@drawable/baseline_storefront_24"
+                app:iconTint="#000000" />
+
+            <Button
+                android:id="@+id/buttonWLCart"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DFECEC"
+                android:hint="h"
+                android:onClick="navWLCart"
+                android:paddingLeft="25dp"
+                android:textColorHint="#DFECEC"
+                app:icon="@drawable/baseline_shopping_cart_24"
+                app:iconTint="#000000" />
+
+            <Button
+                android:id="@+id/buttonWLWishList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DFECEC"
+                android:hint="h"
+                android:onClick="navWLWishlist"
+                android:paddingLeft="25dp"
+                android:textColorHint="#DFECEC"
+                app:icon="@drawable/baseline_favorite_24"
+                app:iconTint="#000000" />
+
+            <Button
+                android:id="@+id/buttonWLAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DFECEC"
+                android:hint="h"
+                android:onClick="navWLAccount"
+                android:paddingLeft="25dp"
+                android:textColorHint="#DFECEC"
+                app:icon="@drawable/baseline_person"
+                app:iconTint="#000000" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewWLsmalllogo"
+                android:layout_width="6dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="navWLHome"
+                app:srcCompat="@drawable/smalllogo"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/textViewWishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="35dp"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:paddingTop="13dp"
+                android:text="WishList"
+                android:textAlignment="viewStart"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

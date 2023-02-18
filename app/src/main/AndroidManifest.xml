@@ -12,6 +12,18 @@
         android:theme="@style/Theme.FinalYearProject"
         tools:targetApi="31">
         <activity
+            android:name=".Customer_CustomerServicePage"
+            android:exported="false" />
+        <activity
+            android:name=".Customer_Cart"
+            android:exported="false" />
+        <activity
+            android:name=".Customer_ShopPage"
+            android:exported="false" />
+        <activity
+            android:name=".Customer_HomePage"
+            android:exported="false" />
+        <activity
             android:name=".CustomerContactPage"
             android:exported="false" />
         <activity
@@ -27,7 +39,7 @@
             android:name=".RegisterDiffActivity"
             android:exported="false" />
         <activity
-            android:name=".Customer_CustomerServicePage"
+            android:name=".Customer_Wishlist"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
