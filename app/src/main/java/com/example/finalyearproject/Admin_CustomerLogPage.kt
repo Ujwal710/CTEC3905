@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
-class AdminHomePage : AppCompatActivity() {
+class Admin_CustomerLogPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_home_page)
+        setContentView(R.layout.activity_admin_customer_log_page)
     }
 
     fun HomeButton(view: View) {
@@ -33,11 +33,6 @@ class AdminHomePage : AppCompatActivity() {
 
     fun ProductLogs(view: View) {
         val intent = Intent(this, AdminProductLogsPage::class.java)
-        startActivity(intent)
-    }
-
-    fun LogoutButton(view: View) {
-        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }

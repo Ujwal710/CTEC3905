@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bb"
+    android:onClick="OrderList"
     tools:context=".AdminHomePage">
 
     <TextView
@@ -50,7 +51,7 @@
         android:layout_height="68dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="#00BCD4"
-        android:onClick="CustomerLogsbutton"
+        android:onClick="CustomerLogs"
         android:text="Customer Logs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -62,7 +63,7 @@
         android:layout_width="238dp"
         android:layout_height="68dp"
         android:backgroundTint="#00BCD4"
-        android:onClick="OrderListbutton"
+        android:onClick="OrderList"
         android:text="Order List"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,7 @@
         android:layout_width="238dp"
         android:layout_height="68dp"
         android:backgroundTint="#00BCD4"
-        android:onClick="CustomerRequestbutton"
+        android:onClick="CustomerRequest"
         android:text="Customer Request"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +85,7 @@
         android:layout_width="238dp"
         android:layout_height="68dp"
         android:backgroundTint="#00BCD4"
-        android:onClick="ProductLogsbutton"
+        android:onClick="ProductLogs"
         android:text="Product Logs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -120,7 +121,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonHome1"
+                android:id="@+id/buttonAHHome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -128,54 +129,56 @@
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
-                android:onClick="Homebutton"
+                android:onClick="HomeButton"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_home"
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/CustomerLog1"
+                android:id="@+id/AHCustomerLog"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="C"
+                android:onClick="CustomerLogs"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_person"
-                app:iconTint="#000000"
-                />
+                app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonOrderlist1"
+                android:id="@+id/buttonAHOrderlist"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
+                android:onClick="OrderList"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_list_alt_24"
-                app:iconTint="#000000"/>
+                app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonCustomerrequest1"
+                android:id="@+id/buttonAHCustomerrequest"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
+                android:onClick="CustomerRequest"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_message"
-                app:iconTint="#000000"/>
+                app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonProductLog1"
+                android:id="@+id/buttonAHProductLog"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
@@ -183,10 +186,11 @@
                 android:layout_weight="1"
                 android:backgroundTint="#DFECEC"
                 android:hint="h"
+                android:onClick="ProductLogs"
                 android:paddingLeft="25dp"
                 android:textColorHint="#DFECEC"
                 app:icon="@drawable/baseline_living_24"
-                app:iconTint="#000000"/>
+                app:iconTint="#000000" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

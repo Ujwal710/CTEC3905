@@ -262,19 +262,17 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/editTextTextMultiLine_Address"
+            <TextView
+                android:id="@+id/textView_Address"
                 android:layout_width="100dp"
-                android:layout_height="90dp"
+                android:layout_height="107dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="4"
                 android:background="@android:drawable/editbox_background_normal"
-                android:ems="10"
-                android:gravity="start|top"
                 android:hint="Address"
-                android:inputType="textMultiLine"
                 android:textAlignment="center"
-                tools:ignore="RtlCompat" />
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

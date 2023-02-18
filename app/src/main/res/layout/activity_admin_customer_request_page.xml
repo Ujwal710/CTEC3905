@@ -5,59 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bb"
-    tools:context=".AdminProductLogsPage">
-
-    <TextView
-        android:id="@+id/textViewProductLogs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Product Logs"
-        android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonCategories"
-        android:layout_width="318dp"
-        android:layout_height="178dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#00BCD4"
-        android:text="Categories Logs"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProductLogs" />
-
-    <Button
-        android:id="@+id/buttonProducts"
-        android:layout_width="318dp"
-        android:layout_height="178dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#00BCD4"
-        android:text="Product Logs"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCategories" />
-
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="267dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#03A9F4"
-        android:onClick="backbutton1"
-        android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonProducts"
-        tools:ignore="TouchTargetSizeCheck" />
+    tools:context=".AdminCustomerRequestPage">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +22,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonAPHome"
+                android:id="@+id/buttonCRHome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -89,7 +37,7 @@
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/APCustomerLog"
+                android:id="@+id/CRCustomerLog"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
@@ -103,7 +51,7 @@
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonAPOrderlist"
+                android:id="@+id/buttonCROrderlist"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
@@ -117,7 +65,7 @@
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonAPCustomerrequest"
+                android:id="@+id/buttonCRCustomerrequest"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
@@ -131,7 +79,7 @@
                 app:iconTint="#000000" />
 
             <Button
-                android:id="@+id/buttonAPProductLog"
+                android:id="@+id/buttonCRProductLog"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"

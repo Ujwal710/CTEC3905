@@ -22,7 +22,7 @@ class CustomerContactPage : AppCompatActivity() {
         val firstName = findViewById<TextView>(R.id.textView_First_Name)
         val surname = findViewById<TextView>(R.id.textView_Surname)
         val Email = findViewById<TextView>(R.id.textView_Email)
-        val Address = findViewById<TextView>(R.id.editTextTextMultiLine_Address)
+        val Address = findViewById<TextView>(R.id.textView_Address)
         val Postcode = findViewById<TextView>(R.id.textView_PostCode)
         val Number = findViewById<TextView>(R.id.textView_Number)
 
@@ -73,7 +73,6 @@ class CustomerContactPage : AppCompatActivity() {
         val intent = Intent(this, CustomerContactPage::class.java)
         intent.putExtra("Customer_UserName", username)
         startActivity(intent)
-
     }
 
     fun CustomerServiceButton(view: View){
