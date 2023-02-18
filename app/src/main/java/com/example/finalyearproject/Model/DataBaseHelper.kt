@@ -132,6 +132,44 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         db.close()
         return -1
     }
+    /*********************---Get CustomerDetails---***********************/
+
+    fun GetCustomerDetails(customer: String): Customer{
+
+        val db: SQLiteDatabase = this.readableDatabase
+        val CustomerUsername = customer
+        val sqlStatement = "SELECT * FROM $CustomerTableName WHERE $Column_CustomerUserName = ?"
+        val param = arrayOf(CustomerUsername)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+        if (cursor.moveToFirst()) {
+
+            var CustomerId = cursor.getInt(0)
+            var CustomerfirstName = cursor.getString(1)
+            var CustomerSurname = cursor.getString(2)
+            var CustomerEmail = cursor.getString(3)
+            var CustomerAddress = cursor.getString(4)
+            var CustomerPostCode = cursor.getString(5)
+            var CustomerNumber = cursor.getString(6)
+            var CustomerUsername = cursor.getString(7)
+            var CustomerPassword = cursor.getString(8)
+            var customer = Customer(
+                CustomerId,
+                CustomerfirstName,
+                CustomerSurname,
+                CustomerEmail,
+                CustomerAddress,
+                CustomerPostCode,
+                CustomerNumber,
+                CustomerUsername,
+                CustomerPassword
+            )
+
+            return customer
+        } else {
+            val customer = Customer(0, "", "", "", "", "", "", "", "")
+            return customer
+        }
+    }
 
     /*********************--- Customer ---*************************/
 
@@ -158,5 +196,6 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         db.close()
         return -1
     }
+
 
 }

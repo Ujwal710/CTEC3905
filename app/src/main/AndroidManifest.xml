@@ -27,7 +27,7 @@
             android:name=".CustomerContactPage"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Customer_Wishlist"
             android:exported="false" />
         <activity
             android:name=".AdminProductLogsPage"
@@ -39,7 +39,7 @@
             android:name=".RegisterDiffActivity"
             android:exported="false" />
         <activity
-            android:name=".Customer_Wishlist"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

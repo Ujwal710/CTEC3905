@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 Message.text = "Error Cannot open Database"
             }else{
                 Toast.makeText(this, "Welcome $Username", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, AdminProductLogsPage::class.java)
+                val intent = Intent(this, Customer_HomePage::class.java)
                 intent.putExtra("Customer_UserName", Username)
                 startActivity(intent)
             }
