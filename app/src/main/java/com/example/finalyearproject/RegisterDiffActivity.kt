@@ -27,12 +27,22 @@ class RegisterDiffActivity : AppCompatActivity() {
         val password = findViewById<TextInputEditText>(R.id.textInputEditPassword).text.toString()
         val Confirmpassword =
             findViewById<TextInputEditText>(R.id.textInputEditConfirmPassword).text.toString()
+        val pattern = Regex("[^a-zA-z]")
 
         if (firstname.isEmpty() || surname.isEmpty() || email.isEmpty() || address.isEmpty() ||
             postcode.isEmpty() || number.isEmpty() || username.isEmpty() || password.isEmpty() || Confirmpassword.isEmpty()
         ) {
             Toast.makeText(this, "Please fill in all the blanket", Toast.LENGTH_SHORT).show()
-        } else {
+
+        } else if(password != Confirmpassword){
+            Toast.makeText(this, "The password and confirm password doesn't match", Toast.LENGTH_SHORT).show()
+
+        } else if(pattern.containsMatchIn(firstname) || pattern.containsMatchIn(surname)){
+
+            Toast.makeText(this, "Please make sure the details are correct", Toast.LENGTH_SHORT).show()
+        }
+        
+        else {
             val newCustomer = Customer(
                 -1,
                 firstname,
