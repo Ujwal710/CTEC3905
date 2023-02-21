@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/bb"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -27,7 +28,7 @@
                 android:layout_width="146dp"
                 android:layout_height="94dp"
                 android:layout_weight="3"
-                app:srcCompat="@drawable/baseline_person" />
+                app:srcCompat="@drawable/baseline_person_24" />
 
             <LinearLayout
                 android:layout_width="321dp"
@@ -76,21 +77,21 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageViewCL_ViewDetails"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginBottom="5dp"
                         app:srcCompat="@drawable/baseline_preview_24" />
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/imageViewCL_EditDetails"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginBottom="5dp"
                         app:srcCompat="@drawable/baseline_edit_calendar_24" />
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/imageViewCL_DeleteDetails"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/baseline_delete_24" />

@@ -124,15 +124,24 @@
                 android:id="@+id/textViewAccounttitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="35dp"
                 android:layout_weight="1"
                 android:paddingLeft="30dp"
                 android:paddingTop="13dp"
                 android:text="Account"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageViewLogout"
+                android:layout_width="1dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:onClick="logoutbutton"
+                app:srcCompat="@drawable/baseline_logout_24"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
     </LinearLayout>

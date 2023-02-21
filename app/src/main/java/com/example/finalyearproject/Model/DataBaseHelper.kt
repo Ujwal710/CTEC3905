@@ -197,5 +197,30 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         return -1
     }
 
+    fun getArrayofCustomerLogfromdatabase():ArrayList<Customer>{
+        val customerList = ArrayList<Customer>()
+        val database: SQLiteDatabase = this.readableDatabase
+        val sql_statement = "SELECT * FROM $CustomerTableName"
+        val cursor: Cursor = database.rawQuery(sql_statement, null)
+        if (cursor.moveToNext()){
+            do {
+                val id : Int = cursor.getInt(0)
+                val firstname: String = cursor.getString(1)
+                val surname : String = cursor.getString(2)
+                val email : String = cursor.getString(3)
+                val address : String = cursor.getString(4)
+                val postcode : String = cursor.getString(5)
+                val number : String = cursor.getString(6)
+                val username : String = cursor.getString(7)
+                val password : String = cursor.getString(8)
+                val custorlogdisplay = Customer(id, firstname, surname, email, address, postcode, number,username, password)
+                customerList.add(custorlogdisplay)
+            } while (cursor.moveToNext())
+            cursor.close()
+            database.close()
+        }
+        return customerList
+    }
+
 
 }

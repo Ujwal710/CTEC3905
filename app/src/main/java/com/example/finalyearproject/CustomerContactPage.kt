@@ -7,6 +7,7 @@ import android.provider.ContactsContract.CommonDataKinds.Email
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.example.finalyearproject.Model.DataBaseHelper
 import com.example.finalyearproject.R
 
@@ -35,7 +36,7 @@ class CustomerContactPage : AppCompatActivity() {
     }
 
 
-
+    /***************************** Navigation bar *************************************/
     fun navACCHome(view: View) {
         val username = intent.getStringExtra("Customer_UserName").toString()
         val intent = Intent(this, Customer_HomePage::class.java)
@@ -74,11 +75,27 @@ class CustomerContactPage : AppCompatActivity() {
         intent.putExtra("Customer_UserName", username)
         startActivity(intent)
     }
-
+    /***************************** Other features *************************************/
     fun CustomerServiceButton(view: View){
         val username = intent.getStringExtra("Customer_UserName").toString()
         val intent = Intent(this, Customer_CustomerServicePage::class.java)
         intent.putExtra("Customer_UserName", username)
         startActivity(intent)
     }
+
+    fun logoutbutton(view: View){
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Logging out!")
+        builder.setMessage("Are you sure you would like to logout!")
+
+        builder.setPositiveButton("Yes") { _, _ ->
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        builder.setNegativeButton("No"){_,_ ->}
+        val dialog = builder.create()
+        dialog.show()
+    }
+
 }
