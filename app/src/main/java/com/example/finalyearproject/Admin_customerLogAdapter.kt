@@ -18,9 +18,6 @@ class Admin_customerLogAdapter (dataBaseHelper: DataBaseHelper) : RecyclerView.A
     private var onClickEdit: ((Customer) -> Unit)? = null
     private var onClickDelete: ((Customer) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int )= CustomerLogViewHolder (
-        LayoutInflater.from(parent.context).inflate(R.layout.layout_customerlog, parent, false),db
-    )
 
     fun addItems(items: ArrayList<Customer>) {
         this.CustomerLogList = items
@@ -32,6 +29,9 @@ class Admin_customerLogAdapter (dataBaseHelper: DataBaseHelper) : RecyclerView.A
         this.onClickDelete = callback
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int )= CustomerLogViewHolder (
+        LayoutInflater.from(parent.context).inflate(R.layout.layout_customerlog, parent, false),db
+    )
 
     override fun onBindViewHolder(holder: Admin_customerLogAdapter.CustomerLogViewHolder, position: Int) {
         val CL = CustomerLogList[position]
@@ -59,7 +59,10 @@ class Admin_customerLogAdapter (dataBaseHelper: DataBaseHelper) : RecyclerView.A
             Username.text = customerLogs.UserName
 
 
+        }
 
+        private fun getdb(): DataBaseHelper{
+            return db
         }
 
     }

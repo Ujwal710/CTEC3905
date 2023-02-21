@@ -30,6 +30,11 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     private val Column_AdminUserName = "AdminUserName"
     private val Column_AdminPassword = "AdminPassword"
 
+    /**Customer request**/
+    private val CustomerQueryTableName = "CustomerQuery"
+    private val Column_CustomerQueryId = "CustomerQueryId"
+
+
 
     override fun onCreate(db: SQLiteDatabase?) {
         try {
@@ -60,22 +65,27 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     fun AddCustomer(customer: Customer): Int {
         val db: SQLiteDatabase = this.writableDatabase
         val cv: ContentValues = ContentValues()
+        val usernameexitst = CheckCustomerLoginName(customer)
+        if (usernameexitst == 0) {
 
-        cv.put(Column_CustomerFirstName, customer.FirstName)
-        cv.put(Column_CustomerSurname, customer.Surname)
-        cv.put(Column_CustomerEmail, customer.Email)
-        cv.put(Column_CustomerAddress, customer.Address)
-        cv.put(Column_CustomerPostCode, customer.PostCode)
-        cv.put(Column_CustomerNumber, customer.Number)
-        cv.put(Column_CustomerUserName, customer.UserName)
-        cv.put(Column_CustomerPassword, customer.Password)
+            cv.put(Column_CustomerFirstName, customer.FirstName)
+            cv.put(Column_CustomerSurname, customer.Surname)
+            cv.put(Column_CustomerEmail, customer.Email)
+            cv.put(Column_CustomerAddress, customer.Address)
+            cv.put(Column_CustomerPostCode, customer.PostCode)
+            cv.put(Column_CustomerNumber, customer.Number)
+            cv.put(Column_CustomerUserName, customer.UserName)
+            cv.put(Column_CustomerPassword, customer.Password)
 
 
-        val success = db.insert(CustomerTableName, null, cv)
+            val success = db.insert(CustomerTableName, null, cv)
 
-        db.close()
-        if (success.toInt() == -1) return success.toInt()
-        else return 1
+            db.close()
+            if (success.toInt() == -1) return success.toInt()
+            else return 1
+        }else{
+            return -3 // user already exists
+        }
     }
 
     /*********************--- CheckCustomerLoginName ---*************************/
@@ -171,7 +181,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         }
     }
 
-    /*********************--- Customer ---*************************/
+    /*********************--- Admin login ---*************************/
 
     fun getAdmin (Admin_Username: String, Admin_Password: String): Int{
         val db: SQLiteDatabase
@@ -196,6 +206,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         db.close()
         return -1
     }
+
+    /*********************--- CustomerLog ---*************************/
 
     fun getArrayofCustomerLogfromdatabase():ArrayList<Customer>{
         val customerList = ArrayList<Customer>()

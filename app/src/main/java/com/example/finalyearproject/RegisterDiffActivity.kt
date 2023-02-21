@@ -64,7 +64,7 @@ class RegisterDiffActivity : AppCompatActivity() {
                 }
                 -1 -> Toast.makeText(this, "Error Creating account", Toast.LENGTH_SHORT).show()
                 -2 -> Toast.makeText(this, "Error can not open database", Toast.LENGTH_SHORT).show()
-                -3 -> Toast.makeText(this, "Student already exist", Toast.LENGTH_SHORT).show()
+                -3 -> Toast.makeText(this, "This username is taken", Toast.LENGTH_SHORT).show()
             }
         }
     }
