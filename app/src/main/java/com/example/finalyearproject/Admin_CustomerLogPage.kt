@@ -26,20 +26,6 @@ class Admin_CustomerLogPage : AppCompatActivity() {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /***************************** Navigation bar *************************************/
     fun HomeButton(view: View) {
         val intent = Intent(this, AdminHomePage::class.java)

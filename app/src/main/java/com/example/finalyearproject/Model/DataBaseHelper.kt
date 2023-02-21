@@ -33,6 +33,10 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     /**Customer request**/
     private val CustomerQueryTableName = "CustomerQuery"
     private val Column_CustomerQueryId = "CustomerQueryId"
+    private val Column_CustomerQueryName = "CustomerQueryName"
+    private val Column_CustomerQueryEmail = "CustomerQueryEmail"
+    private val Column_CustomerQueryProblem = "CustomerQueryProblem"
+    private val Column_CustomerQueryProblemDescription = "CustomerQueryProblemDescription"
 
 
 
@@ -51,6 +55,13 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
              sqlCreateStatement = " CREATE TABLE " + AdminTableName + " ( " + Column_AdminId +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + Column_AdminUserName + " TEXT NOT NULL, " +
                             Column_AdminPassword + " TEXT NOT NULL "
+            db?.execSQL(sqlCreateStatement)
+
+            /*********************--- CustomerQuery ---*************************/
+            sqlCreateStatement = " CREATE TABLE " + CustomerQueryTableName + " ( " + Column_CustomerQueryId +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + Column_CustomerQueryName + " TEXT NOT NULL, " +
+                    Column_CustomerQueryEmail + " TEXT NOT NULL, " + Column_CustomerQueryProblem + " TEXT NOT NULL, " +
+                    Column_CustomerQueryProblemDescription + " TEXT NOT NULL "
             db?.execSQL(sqlCreateStatement)
 
         } catch (e: SQLiteException) {}
@@ -207,7 +218,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         return -1
     }
 
-    /*********************--- CustomerLog ---*************************/
+    /*********************--- CustomerLogAdapter ---*************************/
 
     fun getArrayofCustomerLogfromdatabase():ArrayList<Customer>{
         val customerList = ArrayList<Customer>()
@@ -234,5 +245,46 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         return customerList
     }
 
+    /*********************--- CustomerQuery ---*************************/
+    fun AddCustomerQuerys(customerQuery: CustomerQuery): Int{
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
 
+
+        cv.put(Column_CustomerQueryName, customerQuery.CustomerQueryName)
+        cv.put(Column_CustomerQueryEmail, customerQuery.CustomerQueryEmail)
+        cv.put(Column_CustomerQueryProblem, customerQuery.CustomerQueryProblem)
+        cv.put(Column_CustomerQueryProblemDescription, customerQuery.CustomerQueryProblemDescription)
+
+        val success = db.insert(CustomerQueryTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt()
+        else return 1
+    }
+
+    /*********************--- CustomerQueryAdapter ---*************************/
+    fun getArrayofCustomerRequestsfromdatabase(): ArrayList<CustomerQuery>{
+        val customerrequestList = ArrayList<CustomerQuery>()
+        val database: SQLiteDatabase = this.readableDatabase
+        val sql_statement = "SELECT * FROM $CustomerQueryTableName"
+        val cursor: Cursor = database.rawQuery(sql_statement, null)
+        if (cursor.moveToNext()){
+            do {
+                val id : Int = cursor.getInt(0)
+                val name: String = cursor.getString(1)
+                val email : String = cursor.getString(2)
+                val problem : String = cursor.getString(3)
+                val problemdescription : String = cursor.getString(4)
+                val custumerRequestdisplay = CustomerQuery(id, name, email, problem, problemdescription)
+                customerrequestList.add(custumerRequestdisplay)
+            } while (cursor.moveToNext())
+            cursor.close()
+            database.close()
+        }
+        return customerrequestList
+
+    }
 }
+
+

@@ -3,7 +3,6 @@ package com.example.finalyearproject
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +28,8 @@ class Admin_customerLogAdapter (dataBaseHelper: DataBaseHelper) : RecyclerView.A
         this.onClickDelete = callback
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int )= CustomerLogViewHolder (
         LayoutInflater.from(parent.context).inflate(R.layout.layout_customerlog, parent, false),db
     )
@@ -49,9 +50,9 @@ class Admin_customerLogAdapter (dataBaseHelper: DataBaseHelper) : RecyclerView.A
         private var Name = view.findViewById<TextView>(R.id.textViewCL_Name)
         private var Email = view.findViewById<TextView>(R.id.textViewCL_Email)
         private var Username = view.findViewById<TextView>(R.id.textViewCL_Username)
-        var ViewDetails = view.findViewById<ImageView>(R.id.imageViewCL_ViewDetails)
+        var ViewDetails = view.findViewById<ImageView>(R.id.imageViewCR_ViewDetails)
         var EditDetails = view.findViewById<ImageView>(R.id.imageViewCL_EditDetails)
-        var DeleteDetails = view.findViewById<ImageView>(R.id.imageViewCL_DeleteDetails)
+        var DeleteDetails = view.findViewById<ImageView>(R.id.imageViewCR_DeleteDetails)
 
         fun bindView(customerLogs: Customer) {
             Name.text = customerLogs.FirstName.toString() + " " + customerLogs.Surname
