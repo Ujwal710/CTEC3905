@@ -8,9 +8,10 @@
     tools:context=".Admin_CustomerLogPage">
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="390dp"
         android:layout_height="645dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,17 +22,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_weight="1"
             android:text="Customer Logs"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="34sp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_CustomerLog"
-            android:layout_width="match_parent"
-            android:layout_height="572dp" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_CustomerLog"
+        android:layout_width="match_parent"
+        android:layout_height="572dp"
+        android:layout_marginTop="77dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"

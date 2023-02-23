@@ -4,16 +4,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import com.example.finalyearproject.Model.Customer
 import com.example.finalyearproject.Model.DataBaseHelper
+import com.example.finalyearproject.Model.SecurityQuestions
 import com.google.android.material.textfield.TextInputEditText
 
 class RegisterDiffActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_diff)
+
+        val db = DataBaseHelper(this)
+
+        var dropdownSecurityQuestion = findViewById<Spinner>(R.id.spinnerSecurityQuestions)
+        val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, db.getSecurityQuestionsList())
+        dropdownSecurityQuestion.adapter = arrayAdapter
     }
 
     fun RegisterButton(view: View) {
@@ -25,12 +34,14 @@ class RegisterDiffActivity : AppCompatActivity() {
         val number = findViewById<EditText>(R.id.editTextRegisterNumber).text.toString()
         val username = findViewById<TextInputEditText>(R.id.textInputEditUsername).text.toString()
         val password = findViewById<TextInputEditText>(R.id.textInputEditPassword).text.toString()
-        val Confirmpassword =
-            findViewById<TextInputEditText>(R.id.textInputEditConfirmPassword).text.toString()
+        val Confirmpassword = findViewById<TextInputEditText>(R.id.textInputEditConfirmPassword).text.toString()
+        val securityQuestions = findViewById<Spinner>(R.id.spinnerSecurityQuestions).selectedItem.toString()
+        val answer = findViewById<EditText>(R.id.editTextAnswer).text.toString()
         val pattern = Regex("[^a-zA-z]")
 
         if (firstname.isEmpty() || surname.isEmpty() || email.isEmpty() || address.isEmpty() ||
-            postcode.isEmpty() || number.isEmpty() || username.isEmpty() || password.isEmpty() || Confirmpassword.isEmpty()
+            postcode.isEmpty() || number.isEmpty() || username.isEmpty() || password.isEmpty() || Confirmpassword.isEmpty() || securityQuestions.isEmpty()||
+                    answer.isEmpty()
         ) {
             Toast.makeText(this, "Please fill in all the blanket", Toast.LENGTH_SHORT).show()
 
@@ -52,10 +63,12 @@ class RegisterDiffActivity : AppCompatActivity() {
                 postcode,
                 number,
                 username,
-                password
+                password,
+                -1,
+                answer
             )
             val myDataBase = DataBaseHelper(this)
-            val result = myDataBase.AddCustomer(newCustomer)
+            val result = myDataBase.AddCustomer(newCustomer,securityQuestions)
             when (result) {
                 1 -> {
                     val intent = Intent(this, MainActivity::class.java)

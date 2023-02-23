@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.finalyearproject.Model.Customer
 import com.example.finalyearproject.Model.CustomerQuery
@@ -14,6 +15,17 @@ class Customer_CustomerServicePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_customer_service_page)
+
+        val username = intent.getStringExtra("Customer_UserName").toString()
+        val db = DataBaseHelper(this)
+        val customer = db.GetCustomerDetails(username)
+
+
+        val FullName = findViewById<TextView>(R.id.textViewCSFullName)
+        val Email = findViewById<TextView>(R.id.textViewCSEmail)
+
+        FullName.text = customer.FirstName + " " + customer.Surname
+        Email.text = customer.Email
     }
 
 
@@ -58,8 +70,8 @@ class Customer_CustomerServicePage : AppCompatActivity() {
     }
 
     fun CustomerQueryButton(view: View){
-        val fullname = findViewById<EditText>(R.id.editTextTextCSName).text.toString()
-        val email = findViewById<EditText>(R.id.editTextTextCSEmail).text.toString()
+        val fullname = findViewById<TextView>(R.id.textViewCSFullName).text.toString()
+        val email = findViewById<TextView>(R.id.textViewCSEmail).text.toString()
         val problem = findViewById<EditText>(R.id.editTextTextCSProblem).text.toString()
         val problemdescription = findViewById<EditText>(R.id.editTextCSProblemDescription).text.toString()
         val pattern = Regex("[^a-zA-z]")

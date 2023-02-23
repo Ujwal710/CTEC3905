@@ -22,9 +22,15 @@ class Admin_customerLogAdapter (dataBaseHelper: DataBaseHelper) : RecyclerView.A
         this.CustomerLogList = items
     }
 
-    fun setOnClickItem(callback: (Customer) -> Unit) {
+    fun setOnClickView(callback: (Customer) -> Unit) {
         this.onClickView = callback
+    }
+
+    fun setOnClickEdit(callback: (Customer) -> Unit) {
         this.onClickEdit = callback
+    }
+
+    fun setOnClickDelete(callback: (Customer) -> Unit) {
         this.onClickDelete = callback
     }
 

@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalyearproject.Model.DataBaseHelper
@@ -22,6 +24,21 @@ class AdminCustomerRequestPage : AppCompatActivity() {
         getArrayofCustomerRequest()
         adapter?.setOnClickItem {
 
+        }
+
+        adapter?.setOnClickDelete {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Warning!!!")
+            builder.setMessage("Are you sure you would like to delete this customer Query?")
+            builder.setPositiveButton("Yes"){_,_ ->
+                getDatabase().deleteCustomerrequest(it.CustomerQueryId)
+                Toast.makeText(this, "Query deleted Successfully", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, AdminCustomerRequestPage::class.java)
+                startActivity(intent)
+            }
+            builder.setNegativeButton("No"){ _,_ ->}
+            val dialog = builder.create()
+            dialog.show()
         }
 
 

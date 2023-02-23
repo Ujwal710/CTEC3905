@@ -23,6 +23,9 @@ class AdminCustomerRequestAdapter(dataBaseHelper: DataBaseHelper) : RecyclerView
 
     fun setOnClickItem(callback: (CustomerQuery) -> Unit) {
         this.onClickView = callback
+    }
+
+    fun setOnClickDelete(callback: (CustomerQuery) -> Unit) {
         this.onClickDelete = callback
     }
 

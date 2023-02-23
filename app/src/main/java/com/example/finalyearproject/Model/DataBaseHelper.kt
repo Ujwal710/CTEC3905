@@ -1,5 +1,6 @@
 package com.example.finalyearproject.Model
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -23,6 +24,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     private val Column_CustomerNumber = "Number"
     private val Column_CustomerUserName = "UserName"
     private val Column_CustomerPassword = "Password"
+    private val Column_RSecurityQuestionId = "RSecurityQuestionId"
+    private val Column_Answer = "Answer"
 
     /**Admin Table**/
     private val AdminTableName = "Admin"
@@ -38,6 +41,12 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     private val Column_CustomerQueryProblem = "CustomerQueryProblem"
     private val Column_CustomerQueryProblemDescription = "CustomerQueryProblemDescription"
 
+    /**Security Questions**/
+    private val SecurityQuestionsTableName = "SecurityQuestions"
+    private val Column_SecurityQuestionId = "QuestionId"
+    private val Column_SecurityQuestions = "Questions"
+
+
 
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -48,7 +57,9 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
                     Column_CustomerSurname + " TEXT NOT NULL, " + Column_CustomerEmail + " TEXT NOT NULL, " +
                     Column_CustomerAddress + " TEXT NOT NULL, " + Column_CustomerPostCode + " TEXT NOT NULL, " +
                     Column_CustomerNumber + " TEXT NOT NULL, " + Column_CustomerUserName + " TEXT NOT NULL, " +
-                    Column_CustomerPassword + " TEXT NOT NULL "
+                    Column_CustomerPassword + " TEXT NOT NULL, " + Column_RSecurityQuestionId + " INTEGER, NOT NULL, " +
+                    Column_Answer + " TEXT NOT NULL "
+
             db?.execSQL(sqlCreateStatement)
 
             /*********************--- Admin ---*************************/
@@ -64,6 +75,11 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
                     Column_CustomerQueryProblemDescription + " TEXT NOT NULL "
             db?.execSQL(sqlCreateStatement)
 
+            /*********************--- Security Questions ---*************************/
+            sqlCreateStatement = " CREATE TABLE " + SecurityQuestionsTableName + " ( " + Column_SecurityQuestionId +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + Column_SecurityQuestions + " TEXT NOT NULL, "
+            db?.execSQL(sqlCreateStatement)
+
         } catch (e: SQLiteException) {}
     }
 
@@ -73,12 +89,13 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
 
     /*********************--- AddCustomer ---*************************/
 
-    fun AddCustomer(customer: Customer): Int {
-        val db: SQLiteDatabase = this.writableDatabase
-        val cv: ContentValues = ContentValues()
-        val usernameexitst = CheckCustomerLoginName(customer)
-        if (usernameexitst == 0) {
+    fun AddCustomer(customer: Customer,qusitontext:String): Int {
 
+        val usernameexitst = CheckCustomerLoginName(customer)
+        val questionid = getquestionidbystring(qusitontext)
+        if (usernameexitst == 0) {
+            val db: SQLiteDatabase = this.writableDatabase
+            val cv: ContentValues = ContentValues()
             cv.put(Column_CustomerFirstName, customer.FirstName)
             cv.put(Column_CustomerSurname, customer.Surname)
             cv.put(Column_CustomerEmail, customer.Email)
@@ -87,6 +104,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
             cv.put(Column_CustomerNumber, customer.Number)
             cv.put(Column_CustomerUserName, customer.UserName)
             cv.put(Column_CustomerPassword, customer.Password)
+            cv.put(Column_RSecurityQuestionId, questionid)
+            cv.put(Column_Answer, customer.Answer)
 
 
             val success = db.insert(CustomerTableName, null, cv)
@@ -97,6 +116,28 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         }else{
             return -3 // user already exists
         }
+    }
+
+    private fun getquestionidbystring(qusitontext: String): Int {
+        val db: SQLiteDatabase= this.readableDatabase
+
+        val sqlStatement = "SELECT * FROM $SecurityQuestionsTableName WHERE $Column_SecurityQuestions = ?"
+        val param = arrayOf(qusitontext)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+
+        if(cursor.moveToFirst()){
+            // The user is found
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return n // error the user name is already exist
+        }
+
+        cursor.close()
+        db.close()
+        return 0
+
+
     }
 
     /*********************--- CheckCustomerLoginName ---*************************/
@@ -164,6 +205,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         val cursor: Cursor =  db.rawQuery(sqlStatement,param)
         if (cursor.moveToFirst()) {
 
+
+
             var CustomerId = cursor.getInt(0)
             var CustomerfirstName = cursor.getString(1)
             var CustomerSurname = cursor.getString(2)
@@ -173,6 +216,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
             var CustomerNumber = cursor.getString(6)
             var CustomerUsername = cursor.getString(7)
             var CustomerPassword = cursor.getString(8)
+            var CustomerSecurityQuestion = cursor.getInt(9)
+            var CustomerAnswer = cursor.getString(10)
             var customer = Customer(
                 CustomerId,
                 CustomerfirstName,
@@ -182,12 +227,14 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
                 CustomerPostCode,
                 CustomerNumber,
                 CustomerUsername,
-                CustomerPassword
+                CustomerPassword,
+                CustomerSecurityQuestion,
+                CustomerAnswer
             )
 
             return customer
         } else {
-            val customer = Customer(0, "", "", "", "", "", "", "", "")
+            val customer = Customer(0, "", "", "", "", "", "", "", "", 0, "")
             return customer
         }
     }
@@ -236,7 +283,10 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
                 val number : String = cursor.getString(6)
                 val username : String = cursor.getString(7)
                 val password : String = cursor.getString(8)
-                val custorlogdisplay = Customer(id, firstname, surname, email, address, postcode, number,username, password)
+                val securityQuestionsid : Int = cursor.getInt(9)
+                val answer : String = cursor.getString(10)
+
+                val custorlogdisplay = Customer(id, firstname, surname, email, address, postcode, number,username, password, securityQuestionsid, answer)
                 customerList.add(custorlogdisplay)
             } while (cursor.moveToNext())
             cursor.close()
@@ -285,6 +335,65 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         return customerrequestList
 
     }
+
+    fun deleteCustomerLog(id: Int): Int {
+        val database: SQLiteDatabase = this.writableDatabase
+        val cv = ContentValues()
+        cv.put(Column_CustomerId,id)
+        val work = database.delete(CustomerTableName,Column_CustomerId + "="+id,null)
+        database.close()
+        return work
+    }
+
+    fun deleteCustomerrequest(id: Int): Int {
+        val database: SQLiteDatabase = this.writableDatabase
+        val cv = ContentValues()
+        cv.put(Column_CustomerQueryId,id)
+        val work = database.delete(CustomerQueryTableName,Column_CustomerQueryId + "="+id,null)
+        database.close()
+        return work
+    }
+
+
+    fun getSecurityQuestionsList(): ArrayList<String> {
+        val db: SQLiteDatabase = this.readableDatabase
+        var securityQuestionList = ArrayList<String>()
+        val sqliteStatement = "SELECT * FROM $SecurityQuestionsTableName"
+        val cursor: Cursor = db.rawQuery(sqliteStatement, null)
+        if (cursor.moveToFirst()) {
+            do {
+                var securityQuestions = cursor.getString(1)
+                securityQuestionList.add(securityQuestions)
+            } while (cursor.moveToNext())
+
+            cursor.close()
+            db.close()
+        }
+            return securityQuestionList
+
+        }
+
+
+        fun getSecurityQuestionbyID(securityid: String): String {
+            val database: SQLiteDatabase = this.readableDatabase
+            val SQL_Statement =
+                "SELECT * FROM $SecurityQuestionsTableName WHERE $Column_SecurityQuestionId = ?"
+            val parameter = arrayOf(securityid)
+            val cursor: Cursor = database.rawQuery(SQL_Statement, parameter)
+            if (cursor.moveToFirst()) {
+                // The user is found
+                val n = cursor.getString(1)
+                cursor.close()
+                database.close()
+                return n.toString()
+            }
+            cursor.close()
+            database.close()
+            return "not found"
+        }
+
+
+
 }
 
 
