@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,33 @@ class AdminCustomerRequestPage : AppCompatActivity() {
         RecyclerView()
         getArrayofCustomerRequest()
         adapter?.setOnClickItem {
+            val layout = layoutInflater.inflate(R.layout.layoutcustomerquerys, null)
+            val builder = AlertDialog.Builder(this)
+            val db = DataBaseHelper(this)
+
+            val FullName = layout.findViewById<TextView>(R.id.textViewACQName)
+            val Email = layout.findViewById<TextView>(R.id.textViewACQEmail)
+            val Problem = layout.findViewById<TextView>(R.id.textViewACQProblem)
+            val ProblemDescription = layout.findViewById<TextView>(R.id.textViewACQProblemDescription)
+            val Reply = layout.findViewById<Button>(R.id.buttonreply)
+            val Cancel = layout.findViewById<Button>(R.id.buttonACQCancel)
+
+
+            FullName.setText(it.CustomerQueryName)
+            Email.setText(it.CustomerQueryEmail)
+            Problem.setText(it.CustomerQueryProblem)
+            ProblemDescription.setText(it.CustomerQueryProblemDescription)
+            builder.setView(layout)
+
+
+
+            //builder.setNegativeButton("Cancel") { _, _ ->}
+            val dialog = builder.create()
+            Cancel.setOnClickListener { dialog.dismiss() }
+            dialog.window?.setBackgroundDrawableResource(R.color.matt_black)
+
+            dialog.show()
+
 
         }
 

@@ -6,8 +6,8 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="402dp"
-        android:layout_height="538dp"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
         android:background="#28282B"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCS"
@@ -44,7 +45,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCE"
@@ -54,7 +56,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCA"
@@ -64,7 +67,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCPC"
@@ -74,7 +78,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCN"
@@ -84,7 +89,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCUN"
@@ -94,7 +100,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCP"
@@ -104,7 +111,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCSQ"
@@ -114,7 +122,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textViewCSA"
@@ -124,7 +133,19 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/buttondialogcancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="240dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#292626"
+            android:text="Cancel"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

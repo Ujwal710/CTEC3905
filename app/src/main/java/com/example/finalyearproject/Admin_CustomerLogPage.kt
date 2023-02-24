@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.provider.ContactsContract.Data
 import android.text.Html
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -38,6 +39,7 @@ class Admin_CustomerLogPage : AppCompatActivity() {
 
             val db = DataBaseHelper(this)
             val title = layout.findViewById<TextView>(R.id.dialog_title)
+            val cancel = layout.findViewById<Button>(R.id.buttondialogcancel)
 
             val CFN = layout.findViewById<TextView>(R.id.textViewCFN)
             val CS = layout.findViewById<TextView>(R.id.textViewCS)
@@ -49,8 +51,6 @@ class Admin_CustomerLogPage : AppCompatActivity() {
             val CP = layout.findViewById<TextView>(R.id.textViewCP)
             val CSA = layout.findViewById<TextView>(R.id.textViewCSA)
             val CSQ = layout.findViewById<TextView>(R.id.textViewCSQ)
-
-
 
             val CSAinString = db.getSecurityQuestionbyID(it.RSecurityQuestionId.toString())
 
@@ -67,9 +67,11 @@ class Admin_CustomerLogPage : AppCompatActivity() {
 
             builder.setView(layout)
 
-            builder.setNegativeButton("Cancel") { _, _ ->}
+            //builder.setNegativeButton("Cancel") { _, _ ->}
             val dialog = builder.create()
+            cancel.setOnClickListener { dialog.dismiss() }
             dialog.window?.setBackgroundDrawableResource(R.color.matt_black)
+
             dialog.show()
 
 
