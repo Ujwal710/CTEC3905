@@ -38,6 +38,8 @@ class RegisterDiffActivity : AppCompatActivity() {
         val securityQuestions = findViewById<Spinner>(R.id.spinnerSecurityQuestions).selectedItem.toString()
         val answer = findViewById<EditText>(R.id.editTextAnswer).text.toString()
         val pattern = Regex("[^a-zA-z]")
+        val patternEmail = Regex("^([\\w\\d-._]+)@([\\w\\d-]+)(\\.[\\w\\d]+)*(\\.[a-z]{2,})$")
+        val numberV = Regex("^((\\+44)|(0))( ?)(\\d{3})( ?\\d{3})( ?\\d{4})$")
 
         if (firstname.isEmpty() || surname.isEmpty() || email.isEmpty() || address.isEmpty() ||
             postcode.isEmpty() || number.isEmpty() || username.isEmpty() || password.isEmpty() || Confirmpassword.isEmpty() || securityQuestions.isEmpty()||
@@ -48,7 +50,7 @@ class RegisterDiffActivity : AppCompatActivity() {
         } else if(password != Confirmpassword){
             Toast.makeText(this, "The password and confirm password doesn't match", Toast.LENGTH_SHORT).show()
 
-        } else if(pattern.containsMatchIn(firstname) || pattern.containsMatchIn(surname)){
+        } else if(pattern.containsMatchIn(firstname) || pattern.containsMatchIn(surname) || patternEmail.containsMatchIn(email) || numberV.containsMatchIn(number)){
 
             Toast.makeText(this, "Please make sure the details are correct", Toast.LENGTH_SHORT).show()
         }

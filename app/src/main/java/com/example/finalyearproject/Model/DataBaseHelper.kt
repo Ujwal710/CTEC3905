@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.ContactsContract.CommonDataKinds.Email
 
 
 private val DatabaseName = "FYPDatabase.db"
@@ -45,6 +46,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
     private val SecurityQuestionsTableName = "SecurityQuestions"
     private val Column_SecurityQuestionId = "QuestionId"
     private val Column_SecurityQuestions = "Questions"
+
+
 
 
 
@@ -118,6 +121,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         }
     }
 
+    /*********************--- getquestionidbystring ---*************************/
     private fun getquestionidbystring(qusitontext: String): Int {
         val db: SQLiteDatabase= this.readableDatabase
 
@@ -168,6 +172,62 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         db.close()
         return 0
     }
+
+     fun CheckCustomerEmail(Email: String): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+        val CustomerEmail = Email
+
+
+        val sqlStatement = "SELECT * FROM $CustomerTableName WHERE $Column_CustomerEmail = ? "
+        val param = arrayOf(CustomerEmail)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+
+        if(cursor.moveToFirst()){
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return 1 // error the user name is already exist
+        }
+
+        cursor.close()
+        db.close()
+        return 0
+    }
+
+    /*********************--- CheckCustomerForgetPassword ---*************************/
+    private fun CheckCustomerForgetPassword(Email: String, Answer : String): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+        val Customer_Email = Email
+        val Customer_Answer = Answer
+
+        val sqlStatement = "SELECT * FROM $CustomerTableName WHERE $Column_CustomerEmail = ? AND $Column_Answer"
+        val param = arrayOf(Customer_Email, Customer_Answer)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+
+        if(cursor.moveToFirst()){
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return -3
+        }
+
+        cursor.close()
+        db.close()
+        return 0
+    }
+
 
     /*********************--- getCustomer ---*************************/
 
@@ -336,6 +396,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
 
     }
 
+    /*********************--- deleteCustomerLog ---*************************/
+
     fun deleteCustomerLog(id: Int): Int {
         val database: SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
@@ -345,6 +407,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         return work
     }
 
+    /*********************--- deleteCustomerrequest ---*************************/
     fun deleteCustomerrequest(id: Int): Int {
         val database: SQLiteDatabase = this.writableDatabase
         val cv = ContentValues()
@@ -353,6 +416,45 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         database.close()
         return work
     }
+
+    /*********************--- updateCustomerLog ---*************************/
+    fun updateCustomerLog(DCL: Customer): Int {
+        val database: SQLiteDatabase = this.writableDatabase
+        val cursor = ContentValues()
+
+        cursor.put(Column_CustomerFirstName, DCL.FirstName)
+        cursor.put(Column_CustomerSurname, DCL.Surname)
+        cursor.put(Column_CustomerEmail, DCL.Email)
+        cursor.put(Column_CustomerAddress, DCL.Address)
+        cursor.put(Column_CustomerPostCode, DCL.PostCode)
+        cursor.put(Column_CustomerNumber, DCL.Number)
+
+        val success = database.update(CustomerTableName, cursor, "$Column_CustomerId= ${DCL.CustomerId}", null)
+        database.close()
+
+        if (success == 1) {
+            return success
+        } else {
+            return -1
+        }
+    }
+
+    fun getCustomeridbyusername(username: String): Int {
+        val database: SQLiteDatabase = this.readableDatabase
+        val SQL_Statement =
+            "SELECT * FROM $CustomerTableName WHERE $Column_CustomerUserName = ?"
+        val parameter = arrayOf(username)
+        val cursor: Cursor = database.rawQuery(SQL_Statement, parameter)
+        if (cursor.moveToFirst()) {
+            // The user is found
+            val n = cursor.getInt(0)
+            cursor.close()
+            return n
+        }
+        cursor.close()
+        return -1
+    }
+
 
 
     fun getSecurityQuestionsList(): ArrayList<String> {
@@ -374,7 +476,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
         }
 
 
-        fun getSecurityQuestionbyID(securityid: String): String {
+    fun getSecurityQuestionbyID(securityid: String): String {
             val database: SQLiteDatabase = this.readableDatabase
             val SQL_Statement =
                 "SELECT * FROM $SecurityQuestionsTableName WHERE $Column_SecurityQuestionId = ?"
@@ -392,6 +494,64 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DatabaseName
             return "not found"
         }
 
+
+    fun getSecurityQuestionIdbyEmail(email: String): Int {
+        val database: SQLiteDatabase = this.readableDatabase
+        val SQL_Statement =
+            "SELECT * FROM $CustomerTableName WHERE $Column_CustomerEmail = ?"
+        val parameter = arrayOf(email)
+        val cursor: Cursor = database.rawQuery(SQL_Statement, parameter)
+        if (cursor.moveToFirst()) {
+            val n = cursor.getInt(9)
+            cursor.close()
+            return n
+        }
+        cursor.close()
+        return -1
+    }
+
+    fun checkanswerbyemail(email: String): String {
+        val database: SQLiteDatabase = this.readableDatabase
+        val SQL_Statement =
+            "SELECT * FROM $CustomerTableName WHERE $Column_CustomerEmail = ?"
+        val parameter = arrayOf(email)
+        val cursor: Cursor = database.rawQuery(SQL_Statement, parameter)
+        if (cursor.moveToFirst()) {
+            val n = cursor.getString(10)
+            cursor.close()
+            return n
+        }
+        cursor.close()
+        return ""
+    }
+
+    fun ResetPassword(password: String, customerid:String): Int {
+        val database: SQLiteDatabase = this.writableDatabase
+        val cursor = ContentValues()
+        cursor.put(Column_CustomerPassword, password)
+        val success = database.update(CustomerTableName, cursor, "$Column_CustomerId= ${customerid}", null)
+        database.close()
+        if (success == 1) {
+            return success
+        } else {
+            return -1
+        }
+    }
+
+    fun getCustomeridbyemail(email: String): Int {
+        val database: SQLiteDatabase = this.readableDatabase
+        val SQL_Statement =
+            "SELECT * FROM $CustomerTableName WHERE $Column_CustomerEmail = ?"
+        val parameter = arrayOf(email)
+        val cursor: Cursor = database.rawQuery(SQL_Statement, parameter)
+        if (cursor.moveToFirst()) {
+            val n = cursor.getInt(0)
+            cursor.close()
+            return n
+        }
+        cursor.close()
+        return -1
+    }
 
 
 }

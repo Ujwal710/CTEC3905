@@ -3,17 +3,12 @@ package com.example.finalyearproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import android.text.Html
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalyearproject.Model.Customer
 import com.example.finalyearproject.Model.DataBaseHelper
 
 class Admin_CustomerLogPage : AppCompatActivity() {
@@ -24,14 +19,89 @@ class Admin_CustomerLogPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_customer_log_page)
-
-
         view()
         RecyclerView()
         getArrayofCustomerLog()
+//        adapter?.setOnClickEdit {
+//            val layout = layoutInflater.inflate(R.layout.layouteditingcustomerlogs, null)
+//            val builder = AlertDialog.Builder(this)
+//            val db = DataBaseHelper(this)
+//
+//
+//        }
         adapter?.setOnClickEdit {
+            val builder = AlertDialog.Builder(this)
+            val dialogView = layoutInflater.inflate(R.layout.layouteditingcustomerlogs, null)
+            builder.setView(dialogView)
+            val dialog = builder.create()
+            dialog.window?.setBackgroundDrawableResource(R.color.matt_black)
 
+            dialog.show()
+
+            val Save = dialogView.findViewById<Button>(R.id.buttonESave)
+            val Cancel = dialogView.findViewById<Button>(R.id.buttonECancel)
+
+            val db = DataBaseHelper(this)
+            val ECLFN = dialogView.findViewById<EditText>(R.id.editTextEditCustomerLogName)
+            val ECLS = dialogView.findViewById<EditText>(R.id.editTextEditCustomerLogSurname)
+            val ECLE = dialogView.findViewById<EditText>(R.id.editTextEditCustomerLogEmail)
+            val ECLA = dialogView.findViewById<EditText>(R.id.editTextEditCustomerLogAddress)
+            val ECLPC = dialogView.findViewById<EditText>(R.id.editTextEditCustomerLogPostCode)
+            val ECLN = dialogView.findViewById<EditText>(R.id.editTextEditCustomerLogNumber)
+
+
+            ECLFN.setText(it.FirstName)
+            ECLS.setText(it.Surname)
+            ECLE.setText(it.Email)
+            ECLA.setText(it.Address)
+            ECLPC.setText(it.PostCode)
+            ECLN.setText(it.Number)
+
+            val customerid = db.getCustomeridbyusername(it.UserName).toInt()
+
+
+            Save.setOnClickListener {
+                val ChangeECLFN = ECLFN.text.toString()
+                val ChangeECLS = ECLS.text.toString()
+                val ChangeECLE = ECLE.text.toString()
+                val ChangeECLA = ECLA.text.toString()
+                val ChangeECLPC = ECLPC.text.toString()
+                val ChangeECLN = ECLN.text.toString()
+
+
+                val customer = Customer(
+                    customerid,
+                    ChangeECLFN,
+                    ChangeECLS,
+                    ChangeECLE,
+                    ChangeECLA,
+                    ChangeECLPC,
+                    ChangeECLN,
+                   "",
+                    "",
+                    -1,
+                    ""
+                )
+
+
+
+
+                db.updateCustomerLog(customer)
+
+                Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, Admin_CustomerLogPage::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            Cancel.setOnClickListener {
+                dialog.dismiss()
+            }
         }
+
+
+
         adapter?.setOnClickView {
             val layout = layoutInflater.inflate(R.layout.layoutpreview, null)
             val builder = AlertDialog.Builder(this)
@@ -73,7 +143,6 @@ class Admin_CustomerLogPage : AppCompatActivity() {
             dialog.window?.setBackgroundDrawableResource(R.color.matt_black)
 
             dialog.show()
-
 
         }
 
@@ -129,14 +198,14 @@ class Admin_CustomerLogPage : AppCompatActivity() {
 private fun view() {
         recycler = findViewById(R.id.recycler_CustomerLog)
     }
-
     private fun RecyclerView() {
         recycler.layoutManager = LinearLayoutManager(this)
         adapter = Admin_customerLogAdapter(getDatabase())
         recycler.adapter = adapter
-
-
     }
+
+
+
 
     private fun getDatabase(): DataBaseHelper {
         Database = DataBaseHelper(this)
@@ -146,7 +215,6 @@ private fun view() {
         val CustomerLogList = Database.getArrayofCustomerLogfromdatabase()
         adapter?.addItems(CustomerLogList)
     }
-
 
 }
 

@@ -47,6 +47,7 @@ class AdminCustomerRequestPage : AppCompatActivity() {
 
             //builder.setNegativeButton("Cancel") { _, _ ->}
             val dialog = builder.create()
+            Reply.setOnClickListener { }
             Cancel.setOnClickListener { dialog.dismiss() }
             dialog.window?.setBackgroundDrawableResource(R.color.matt_black)
 

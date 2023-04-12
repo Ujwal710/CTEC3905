@@ -10,8 +10,10 @@ import android.widget.Toast
 import com.example.finalyearproject.Model.Admin
 import com.example.finalyearproject.Model.Customer
 import com.example.finalyearproject.Model.DataBaseHelper
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
+     var backcounter = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,7 +57,21 @@ class MainActivity : AppCompatActivity() {
     fun buttonregister(view: View) {
         val intent = Intent(this, RegisterDiffActivity::class.java)
         startActivity(intent)
-
-
     }
+
+    fun forgetPassword(view: View){
+        val intent = Intent(this, ForgetPassword::class.java)
+        startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+       backcounter += 1
+        if (backcounter == 1){
+            Toast.makeText(this, "Please press back again to exit", Toast.LENGTH_SHORT).show()
+        } else {
+            this@MainActivity.finish()
+            exitProcess(0)
+        }
+    }
+
 }

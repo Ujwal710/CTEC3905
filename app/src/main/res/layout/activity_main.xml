@@ -119,6 +119,7 @@
         android:id="@+id/textViewForgotPassword"
         android:layout_width="122dp"
         android:layout_height="26dp"
+        android:onClick="forgetPassword"
         android:text="Forgot Password?"
         android:textColor="@color/teal_200"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignin"

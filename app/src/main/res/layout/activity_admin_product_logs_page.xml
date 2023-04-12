@@ -46,19 +46,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCategories" />
 
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="267dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#03A9F4"
-        android:onClick="backbutton1"
-        android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonProducts"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
